@@ -5,6 +5,8 @@ import com.minhho.models.SimpleSort;
 import com.minhho.models.UserIO;
 import com.minhho.utils.AlgoUtils;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 
 public class MainController {
@@ -28,6 +30,10 @@ public class MainController {
             choice = sc.next();
         }
 
+        Instant startTime;
+        Instant endTime;
+        long duration;
+
         switch (choice) {
             case "1":
                 userIO.writeToFile();
@@ -37,7 +43,14 @@ public class MainController {
                 break;
             case "3":
                 SimpleSort simpleSort = new SimpleSort(userIO);
+                // track time
+                startTime = Instant.now();
+
                 simpleSort.bubbleSort();
+
+                endTime = Instant.now();
+                duration = Duration.between(startTime, endTime).getNano();
+                System.out.println("Bubble sort takes " + duration + " nanoseconds");
 
                 //write to file
                 simpleSort.setFileName("OUTPUT1.TXT");
@@ -45,7 +58,14 @@ public class MainController {
                 break;
             case "4":
                 SimpleSort simpleSort2 = new SimpleSort(userIO);
+
+                startTime = Instant.now();
+
                 simpleSort2.selectionSort();
+
+                endTime = Instant.now();
+                duration =  Duration.between(startTime, endTime).getNano();
+                System.out.println("Selection sort takes " + duration + " nanoseconds");
 
                 //write to file
                 simpleSort2.setFileName("OUTPUT2.TXT");
@@ -53,7 +73,14 @@ public class MainController {
                 break;
             case "5":
                 SimpleSort simpleSort3 = new SimpleSort(userIO);
+
+                startTime = Instant.now();
+
                 simpleSort3.insertionSort();
+
+                endTime = Instant.now();
+                duration =  Duration.between(startTime, endTime).getNano();
+                System.out.println("Insertion sort takes " + duration + " nanoseconds");
 
                 //write to file
                 simpleSort3.setFileName("OUTPUT3.TXT");
