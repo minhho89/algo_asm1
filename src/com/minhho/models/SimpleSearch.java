@@ -1,11 +1,15 @@
 package com.minhho.models;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class SimpleSearch {
 
     private UserIO userIO;
+    private ArrayList<String> resultList;
 
     public SimpleSearch(UserIO userIO) {
         this.userIO = userIO;
@@ -45,10 +49,13 @@ public class SimpleSearch {
         System.out.println("Our array: " + Arrays.toString(userIO.getIntArray()));
         System.out.println("Index of elements with a value greater than " + value + ":");
 
+        resultList = new ArrayList<>(); // for writing to file
+
         for (int i = 0; i < userIO.getIntArray().length; i++) {
             if (value < userIO.getIntArray()[i]) {
                 flag = true;
                 System.out.print(i + " ");
+                resultList.add(i + " ");
             }
         }
 
@@ -72,6 +79,9 @@ public class SimpleSearch {
             int mid = low + ((high - low) /2);
 
             if (sortedArray[mid] == value ) {
+                resultList = new ArrayList<>(); // for writing to file
+                resultList.add(String.valueOf(mid));
+
                 System.out.println("Your value position is " + mid);
                 return;
             } else if (sortedArray[mid] < value) { // right partition
@@ -82,5 +92,22 @@ public class SimpleSearch {
 
         }
         System.out.println("No position found.");
+    }
+
+    public void writeToFile(String fileName) {
+        System.out.println("Writing result to file...");
+        try {
+            FileWriter write = new FileWriter(fileName);
+            for(String s :resultList) {
+                write.write(s + "\n");
+            }
+            System.out.println("Writing to file completed.");
+            System.out.println();
+            write.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Writing to file failed.");
+        }
+
     }
 }

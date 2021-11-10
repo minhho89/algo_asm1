@@ -62,10 +62,12 @@ public class MainController {
             case "6":
                 SimpleSearch simpleSearch1 = new SimpleSearch(userIO);
                 simpleSearch1.linearSearch(simpleSearch1.inputSearchValue());
+                simpleSearch1.writeToFile("OUTPUT4.TXT");
                 break;
             case "7":
                 SimpleSearch simpleSearch2 = new SimpleSearch(userIO);
                 simpleSearch2.binarySearch(simpleSearch2.inputSearchValue());
+                simpleSearch2.writeToFile("OUTPUT5.TXT");
                 break;
             default:
                 // case 0
